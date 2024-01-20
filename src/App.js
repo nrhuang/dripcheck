@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
+import {Helmet} from 'react-helmet';
 
 import './App.css';
+
+class Application extends React.Component {
+  render () {
+    return (
+      <div className='application'>
+        <Helmet>
+          <style>{'body { background-color: red; }'}</style>
+        </Helmet>
+      </div>
+    )
+  }
+}
+
 
 function App() {
   const [location, setLocation] = useState(null);
