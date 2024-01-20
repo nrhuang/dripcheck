@@ -36,6 +36,10 @@ function App() {
     }
   }, []);
   
+  useEffect(() => {
+    createPrompt();
+  }, [weather]);
+  
   function handleSubmit() {
     getWeather();
     getInput();
@@ -50,7 +54,10 @@ function App() {
         console.log(data);
       })
       .catch(error => console.log(error));
-    
+  }
+  
+  function createPrompt() {
+    console.log(location);
     console.log(weather);
   }
 
