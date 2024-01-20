@@ -1,8 +1,13 @@
+@font-face {
+  font-family: "FredokaOne";
+  src: url('../public/Fredoka.ttf') format('truetype');
+}
+
 body {
   background-color: #9dd9f3;
   color: white;
   padding: 40px;
-  font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+  font-family: FredokaOne;
 }
 
 #logo {
