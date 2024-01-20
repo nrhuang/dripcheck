@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -6,6 +6,17 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [hasLocation, setHasLocation] = useState(false);
   const [image, setImage] = useState(null);
+  const [placeholderText, setPlaceholderText] = useState('');
+
+  useEffect(() => {
+    generateRandomPlaceholder();
+  },[])
+
+  function generateRandomPlaceholder(){
+    const items = ["Give me something stylish...","What should I wear to a red carpet event?"];
+    const randomItem = items[Math.floor(Math.random() * items.length)];
+    setPlaceholderText(randomItem);
+  }
   
   function handleSubmit() {
     getLocation();
@@ -44,7 +55,7 @@ function App() {
         <h1> Check The Drip &#9748;</h1>
       </div>
       <div className='Location'>
-        <input id="searchBar"></input>
+        <input id="searchBar" placeholder={placeholderText}></input>
         <button id='getLocation' onClick={handleSubmit}>Get Location</button>
       </div>
       <div className='dripImage'> 
