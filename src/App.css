@@ -25,3 +25,23 @@ body {
   text-align: center;
   font-size: 39px;
 }
+
+#searchBar {
+  height: 40px;
+  width: 500px;
+  border-radius: 20px;
+  margin-right: 10px;
+  background-color: whitesmoke;
+  border-color: rgb(58, 229, 215);
+}
+
+#getLocation {
+  height: 46px;
+  width: 100px;
+  color: #9dd9f3;
+  font-family: "FredokaOne";
+  src: url('../public/Fredoka.ttf') format('truetype');
+  font-weight: bold;
+  border-radius: 20px;
+  border-color: rgb(58, 229, 215);
+}
