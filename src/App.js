@@ -33,20 +33,25 @@ function App() {
     }
   }, [location]);
   
+  useEffect(() => {
+    createPrompt();
+  }, [weather]);
+  
   function handleSubmit() {
     getWeather();
   }
   
   function getWeather() {
-    console.log(location);
-    
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
       .then(response => response.json())
       .then(data => {
         setWeather(data);
       })
       .catch(error => console.log(error));
-    
+  }
+  
+  function createPrompt() {
+    console.log(location);
     console.log(weather);
   }
   
