@@ -5,9 +5,24 @@ function App() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   
-  
   function handleSubmit() {
-    
+    getLocation()
+  }
+  
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.log('Error getting current location: ', error);
+        });
+    } else {
+      console.log("Geolocation not supported");
+    }
+    console.log(location);
   }
   
   return (
