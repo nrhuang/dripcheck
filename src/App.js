@@ -11,7 +11,9 @@ function App() {
   },[])
 
   function generateRandomPlaceholder(){
-    const items = ["Give me something stylish...","What should I wear to a red carpet event?"];
+    const items = ["Give me something stylish...","What should I wear to a red carpet event?",
+                  "I want to try something new...", "It's raining but I still want to look good.",
+                  ];
     const randomItem = items[Math.floor(Math.random() * items.length)];
     setPlaceholderText(randomItem);
   }
