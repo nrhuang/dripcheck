@@ -6,6 +6,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [hasLocation, setHasLocation] = useState(false);
   const [image, setImage] = useState(null);
+  const [hasImage, setHasImage] = useState(false);
   const [placeholderText, setPlaceholderText] = useState('');
 
   useEffect(() => {
@@ -13,17 +14,11 @@ function App() {
   },[])
 
   function generateRandomPlaceholder(){
-    const items = ["Give me something stylish...","What should I wear to a red carpet event?"];
+    const items = ["Give me something stylish...","What should I wear to a red carpet event?", "What should I wear to a party?"];
     const randomItem = items[Math.floor(Math.random() * items.length)];
     setPlaceholderText(randomItem);
   }
-  
-  function handleSubmit() {
-    getLocation();
-  }
-  
-function getLocation() {
-  getInput();
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -31,6 +26,7 @@ function getLocation() {
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
           setHasLocation(true);
+          console.log('got the location!!!');
         },
         (error) => {
           console.log('Error getting current location: ', error);
@@ -38,11 +34,11 @@ function getLocation() {
     } else {
       console.log("Geolocation not supported");
     }
-  }, [location]);
-}
+  }, []);
   
   function handleSubmit() {
     getWeather();
+    getInput();
   }
   
   function getWeather() {
@@ -51,6 +47,7 @@ function getLocation() {
       .then(response => response.json())
       .then(data => {
         setWeather(data);
+        console.log(data);
       })
       .catch(error => console.log(error));
     
@@ -58,6 +55,7 @@ function getLocation() {
   }
 
   function getInput() {
+    setHasImage(true);
     var input = document.getElementById("searchBar");
     console.log(input.value);
     if(input.value === 'meow') setImage("https://media1.tenor.com/m/Jc9jT66AJRwAAAAd/chipi-chipi-chapa-chapa.gif");
@@ -76,7 +74,7 @@ function getLocation() {
         <button id='getLocation' onClick={handleSubmit}>Get Location</button>
       </div>
       <div className='dripImage'> 
-        {hasLocation && <img id= 'drip' src={image} alt="filler"></img>}
+        {hasImage && <img id= 'drip' src={image} alt="filler"></img>}
       </div>
     </div>
   );

@@ -49,6 +49,11 @@ body {
   margin-right: 10px;
   background-color: whitesmoke;
   border-color: rgb(58, 229, 215);
+  font-family: "FredokaOne";
+  src: url('../public/Fredoka.ttf') format('truetype');
+  font-size: 17px;
+  font-weight: 600;
+  color:rgb(37, 64, 84);
 }
 
 #getLocation {
