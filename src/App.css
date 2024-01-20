@@ -2,13 +2,14 @@ body {
   background-color: #9dd9f3;
   color: white;
   padding: 40px;
-  font-family: Arial;
+  font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
 }
 
 #logo {
   border-radius: 20px;
   width: 100px;
   height: 100px;
+  float: left;
 }
 
 .Location {
@@ -17,4 +18,5 @@ body {
 
 .Title {
   text-align: center;
+  font-size: 39px;
 }
