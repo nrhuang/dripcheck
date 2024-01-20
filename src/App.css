@@ -20,6 +20,7 @@ body {
 }
 
 .outfitBox {
+  position: relative;
   width: 300px;
   height: 400px;
   border: 1px solid white;
@@ -29,7 +30,7 @@ body {
   border-radius: 20px;
   align-items: center;
   top: 50%;
-  left: 50%;
+  left: 27%;
 }
 
 .Location {
