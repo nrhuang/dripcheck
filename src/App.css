@@ -11,10 +11,12 @@ body {
 }
 
 #logo {
+  position: absolute;
   border-radius: 30px;
-  width: 100px;
-  height: 100px;
-  float: left;
+  width: 125px;
+  height: 125px;
+  left: 2%;
+  top: 4%;
 }
 
 .Location {
