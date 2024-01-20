@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   
-  function handleSubmit() {
-    getLocation()
-  }
-  
-  function getLocation() {
+  useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -22,7 +18,23 @@ function App() {
     } else {
       console.log("Geolocation not supported");
     }
+  }, [location]);
+  
+  function handleSubmit() {
+    getWeather();
+  }
+  
+  function getWeather() {
     console.log(location);
+    
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
+      .then(response => response.json())
+      .then(data => {
+        setWeather(data);
+      })
+      .catch(error => console.log(error));
+    
+    console.log(weather);
   }
   
   return (
