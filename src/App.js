@@ -39,6 +39,7 @@ function App() {
         <input id="searchBar"></input>
         <button id='getLocation' onClick={handleSubmit}>Get Location</button>
       </div>
+      <div class="outfitBox"></div>
     </div>
   );
 }
