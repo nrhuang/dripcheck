@@ -1,15 +1,8 @@
 body {
-  background-color: #282c34;
+  background-color: #9dd9f3;
   color: white;
   padding: 40px;
   font-family: Arial;
-  text-align: center;
-}
-
-
-.App {
-  font-family: 'Times New Roman', Times, serif;
-  background-color: aqua;
 }
 
 #logo {
