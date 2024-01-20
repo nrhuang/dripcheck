@@ -50,6 +50,9 @@ function App() {
         <input id="searchBar" placeholder={placeholderText}></input>
         <button id='getLocation' onClick={handleSubmit}>Get Location</button>
       </div>
+      <div className='dripImage'> 
+        <img id= 'drip' src="https://media1.tenor.com/m/Jc9jT66AJRwAAAAd/chipi-chipi-chapa-chapa.gif" alt="filler"></img>
+      </div>
     </div>
   );
 }
