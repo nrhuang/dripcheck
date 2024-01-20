@@ -12,6 +12,10 @@ function App() {
   
   return (
     <div className="App">
+      <head>
+        <link rel="icon" href="%PUBLIC_URL%/dripcheck.ico" />
+        <title>Drip Check</title>
+      </head>
       <img id="logo" src="dripcheck.png" alt= "logo"/>  
       <div className='Title'>
         <h1> Check The Drip &#9748;</h1>
