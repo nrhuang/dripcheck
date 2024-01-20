@@ -35,8 +35,12 @@ function App() {
   
   return (
     <div className="App">
-      <h1>Drip Check</h1>
-      <div>
+      <img id="logo" src="https://media1.tenor.com/m/Jc9jT66AJRwAAAAd/chipi-chipi-chapa-chapa.gif" alt= "logo"/>
+      <div className='Title'>
+        <h1>Check The Drip &#9748;</h1>
+      </div>
+      <div className='Location'>
+        <input></input>
         <button onClick={handleSubmit}>Get Location</button>
       </div>
     </div>
