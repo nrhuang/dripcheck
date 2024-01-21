@@ -11,6 +11,10 @@ body {
   font-family: FredokaOne;
 }
 
+.Map {
+  align-self: center;
+}
+
 #logo {
   position: absolute;
   border-radius: 30px;

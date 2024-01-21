@@ -3,18 +3,10 @@ import { Loader } from "@googlemaps/js-api-loader"
 import './App.css';
 
 const loader = new Loader({
-  apiKey: {REACT_APP_MAP_API_KEY}
+  apiKey: process.env.REACT_APP_MAP_API_KEY,
+  version: "weekly",
+  libraries: ["maps"]
 });
-
-loader.load().then(async () => {
-  const { Map } = await google.maps.importLibrary("maps");
-
-  map = new Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-});
-
 
 function App() {
   const [location, setLocation] = useState(null);
@@ -24,6 +16,31 @@ function App() {
   const [image, setImage] = useState(null);
   const [hasImage, setHasImage] = useState(false);
   const [placeholderText, setPlaceholderText] = useState('');
+  const [googleMapState, setGoogleMapState] = useState(null);
+
+  let googleMapDiv;
+
+  useEffect(() => {
+        const defaultMapOptions = {
+            center: {
+                lat: 40.762312,
+                lng: -73.979345
+            },
+            zoom: 11
+        };
+        loader.load().then((google) => {
+            const map = new google.maps.Map(
+                googleMapDiv,
+                defaultMapOptions);
+            map.addListener("click", (e) => {
+              console.log(e.latLng.lat() + " " + e.latLng.lng());
+            })
+            setGoogleMapState({
+                google: google,
+                map: map
+            });
+        });
+  },[weather])
 
   useEffect(() => {
     generateRandomPlaceholder();
@@ -96,6 +113,9 @@ function App() {
         <link rel="icon" href="%PUBLIC_URL%/dripcheck.ico" />
         <title>Drip Check</title>
       </head>
+      <div ref={(ref) => { googleMapDiv = ref }}
+        style={{ height: '50vh', width: '50vh' }}>
+      </div>
       <img id="logo" src="dripcheck.png" alt= "logo"/>  
       <div className='Title'>
         <h1 id='header'> Check The Drip &#9748;</h1>
