@@ -1,4 +1,5 @@
 # DripCheck
+DripCheck was our submission for nwHacks2024!
 ## Inspiration
 With recent erratic Vancouver weather, people have been struggling to dress for the weather while still being able to express themselves through their own personal styles. Between checking our weather apps and staring at our closets every single morning, finding the right drip is draining people's time. That is why we created DripCheck - to solve chronic indecision and to help people's styles shine regardless of the weather.
 ## What it does
