@@ -4,6 +4,7 @@
 }
 
 body {
+  background-image: url("../public/background.png");
   background-color: #9dd9f3;
   color: white;
   padding: 40px;
