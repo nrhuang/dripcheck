@@ -21,16 +21,13 @@ function App() {
     setPlaceholderText(randomItem);
   }
   
-  function handleSubmit() {
-    getLocation()
-  }
-  
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
+          setHasLocation(true);
         },
         (error) => {
           console.log('Error getting current location: ', error);
@@ -38,15 +35,18 @@ function App() {
     } else {
       console.log("Geolocation not supported");
     }
-  } [];
+  };
   
   useEffect(() => {
+    getLocation();
+  },[]);
+
+  useEffect(()=> {
+    getWeather();
     createPrompt();
-    console.log('got the weather!!!');
-  }, [weather]);
+  },[location])
   
   function handleSubmit() {
-    getWeather();
     getInput();
   }
   
@@ -89,7 +89,7 @@ function App() {
       </div>
       <div className='Location'>
         <input id="searchBar" placeholder={placeholderText}></input>
-        <button id='getDrip' onClick={handleSubmit}>Get My Drip</button>
+        <button id='getDrip' onClick={handleSubmit} disabled={!hasLocation && !hasWeather}>Get My Drip</button>
       </div>
       <div className='dripImage'> 
         {hasLocation && hasWeather && hasImage && <img id= 'drip' src={image} alt="filler"></img>}
