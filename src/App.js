@@ -22,6 +22,9 @@ function App() {
   const [image, setImage] = useState(null);
   const [hasImage, setHasImage] = useState(false);
 
+  const [data, setData] = useState(null);
+  const [hasData, setHasData] = useState(false);
+
   const [currLocation, setCurrLocation] = useState(null);
 
   const [placeholderText, setPlaceholderText] = useState('');
@@ -58,7 +61,6 @@ function App() {
   function handleSubmit() {
     getOutfitRec();
     setClicked(true);
-    console.log(mapLocation.latitude + " " + mapLocation.longitude);
   }
   
   function getLocation() {
@@ -91,9 +93,10 @@ function App() {
   function getOutfitRec() {
     var input = document.getElementById('searchBar').value;
     var prompt = `Here are the current weather conditions: ${weather.weather[0].description}, Temperature: ${weather.main.temp} degrees celsius. ` + input + ` . Tell me what to wear.`
-    fetch(`http://localhost:5000/api/chatgpt/${prompt}`)
+    fetch(`http://localhost:8000/api/chatgpt/${prompt}`)
       .then(res => res.text())
       .then(data => console.log(data))
+      setHasData(true);
   }
 
   function getWeatherGoogle() {
@@ -198,7 +201,7 @@ function App() {
       </div>
 
       <div className='dripImage'> 
-        {(hasLocation || hasMapLocation) && hasWeather && hasImage && <img id= 'drip' src={image} alt="filler"></img>}
+        {(hasLocation || hasMapLocation) && hasWeather && hasImage && hasData && <img id= 'drip' src={data.image} alt="filler"></img>}
       </div>
 
     </div>
