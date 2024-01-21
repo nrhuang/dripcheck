@@ -96,3 +96,8 @@ body {
   border-color: #3e4772;
   box-shadow: 2px 3px 10px #597cbc;
 }
+
+#getDrip:hover {
+  background-color: #304674;
+  color: white;
+}
