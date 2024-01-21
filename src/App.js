@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { Loader } from "@googlemaps/js-api-loader"
 import './App.css';
+
+const loader = new Loader({
+  apiKey: {REACT_APP_MAP_API_KEY}
+});
+
+loader.load().then(async () => {
+  const { Map } = await google.maps.importLibrary("maps");
+
+  map = new Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+});
+
 
 function App() {
   const [location, setLocation] = useState(null);
