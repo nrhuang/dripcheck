@@ -6,14 +6,14 @@ import './App.css';
 const loader = new Loader({
   apiKey: process.env.REACT_APP_MAP_API_KEY,
   version: "weekly",
-  libraries: ["maps"]
+  libraries: ["places"]
 });
 
 function App() {
   const [location, setLocation] = useState(null);
   const [hasLocation, setHasLocation] = useState(false);
 
-  const [mapLocation, setMapLocation] = useState([49.262152, -123.244766]);
+  const [mapLocation, setMapLocation] = useState(0);
   const [hasMapLocation, setHasMapLocation] = useState(false);
 
   const [weather, setWeather] = useState(null);
@@ -27,34 +27,10 @@ function App() {
   const [placeholderText, setPlaceholderText] = useState('');
   const [googleMapState, setGoogleMapState] = useState(null);
   const [checked, setChecked] = useState(false);
+  const [hasWindow, setHasWindow] = useState(null);
+  const [clicked, setClicked] = useState(false);
 
   let googleMapDiv;
-
-  useEffect(() => {
-        const defaultMapOptions = {
-            center: {
-                lat: 49.262152,
-                lng: -123.244766
-            },
-            zoom: 15
-        };
-        loader.load().then((google) => {
-            const map = new google.maps.Map(
-                googleMapDiv,
-                defaultMapOptions);
-            map.addListener("click", (e) => {
-              console.log(e.latLng.lat() + " " + e.latLng.lng());
-              var lat = e.latLng.lat();
-              var lng = e.latLng.lng();
-              setMapLocation([lat, lng]);
-              setHasMapLocation(true);
-            })
-            setGoogleMapState({
-                google: google,
-                map: map
-            });
-        });
-  },[weather])
 
   useEffect(() => {
     generateRandomPlaceholder();
@@ -74,16 +50,16 @@ function App() {
   useEffect(()=> {
     getWeather();
   },[location])
+
+  useEffect(()=> {
+    getWeatherGoogle();
+  },[mapLocation, clicked])
   
   function handleSubmit() {
     getInput();
+    setClicked(true);
     createPrompt();
-    if(checked) {
-      setCurrLocation(location);
-    } else {
-      setCurrLocation(mapLocation);
-    }
-    console.log("current location is: " + currLocation);
+    console.log(mapLocation.latitude + " " + mapLocation.longitude);
   }
   
   function getLocation() {
@@ -91,7 +67,7 @@ function App() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setLocation([latitude, longitude]);
+          setLocation({latitude, longitude});
           setHasLocation(true);
         },
         (error) => {
@@ -104,7 +80,7 @@ function App() {
   
   function getWeather() {
     if(!hasLocation) return;
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${currLocation.latitude}&lon=${currLocation.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
       .then(response => response.json())
       .then(data => {
         setWeather(data);
@@ -112,6 +88,50 @@ function App() {
       })
       .catch(error => console.log(error));
   }
+
+  function getWeatherGoogle() {
+    if(!hasMapLocation) return;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${mapLocation.latitude}&lon=${mapLocation.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
+      .then(response => response.json())
+      .then(data => {
+        setWeather(data);
+        setHasWeather(true);
+      })
+      .catch(error => console.log(error));
+  }
+
+  useEffect(() => {
+    if(window.google) {
+      setHasWindow("one");
+    }
+  })
+
+  useEffect(() => {
+      const defaultMapOptions = {
+        center: {
+            lat: 49.262152,
+            lng: -123.244766
+        },
+        zoom: 15
+      };
+      loader.load().then((google) => {
+        const map = new google.maps.Map(
+            googleMapDiv,
+            defaultMapOptions);
+        map.addListener("click", (e) => {
+          console.log(e.latLng.lat() + " " + e.latLng.lng());
+          let latitude = e.latLng.lat();
+          let longitude = e.latLng.lng();
+          setMapLocation({latitude, longitude});
+          console.log(mapLocation);
+          setHasMapLocation(true);
+        })
+        setGoogleMapState({
+            google: google,
+            map: map
+        });
+      });
+  },[location])
 
   function getInput() {
     setHasImage(true);
@@ -123,7 +143,8 @@ function App() {
   }
   
   function createPrompt() {
-    console.log(currLocation);
+    console.log(mapLocation);
+    console.log(location);
     console.log(weather);
   }
 
@@ -159,7 +180,7 @@ function App() {
       </div>
 
       <div className='CurrPos'>
-        <p id>{checked ? "Lat: "+ Math.round(location[0] * 1000000) / 1000000 + "Long: "+ Math.round(location[1] * 1000000) / 1000000: "Lat: "+ Math.round(mapLocation[0] * 1000000) / 1000000 + "Long: "+ Math.round(mapLocation[1] * 1000000) / 1000000} </p>
+        <p id>{checked ? "Lat: "+ Math.round(location.latitude * 1000000) / 1000000 + "Long: "+ Math.round(location.longitude * 1000000) / 1000000: "Lat: "+ Math.round(mapLocation.latitude * 1000000) / 1000000 + "Long: "+ Math.round(mapLocation.longitude * 1000000) / 1000000} </p>
       </div>
 
       <div className='Switch'>
