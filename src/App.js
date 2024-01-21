@@ -58,7 +58,6 @@ function App() {
       .then(data => {
         setWeather(data);
         setHasWeather(true);
-        console.log(data);
       })
       .catch(error => console.log(error));
   }
@@ -85,7 +84,7 @@ function App() {
       </head>
       <img id="logo" src="dripcheck.png" alt= "logo"/>  
       <div className='Title'>
-        <h1> Check The Drip &#9748;</h1>
+        <h1 id='header'> Check The Drip &#9748;</h1>
       </div>
       <div className='Location'>
         <input id="searchBar" placeholder={placeholderText}></input>
