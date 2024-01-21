@@ -5,6 +5,7 @@ function App() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [hasLocation, setHasLocation] = useState(false);
+  const [hasWeather, setHasWeather] = useState(false);
   const [image, setImage] = useState(null);
   const [hasImage, setHasImage] = useState(false);
   const [placeholderText, setPlaceholderText] = useState('');
@@ -38,6 +39,7 @@ function App() {
   
   useEffect(() => {
     createPrompt();
+    console.log('got the weather!!!');
   }, [weather]);
   
   function handleSubmit() {
@@ -47,10 +49,12 @@ function App() {
   
   function getWeather() {
     console.log(location);
+    if(!hasLocation) return;
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
       .then(response => response.json())
       .then(data => {
         setWeather(data);
+        setHasWeather(true);
         console.log(data);
       })
       .catch(error => console.log(error));
@@ -78,10 +82,10 @@ function App() {
       </div>
       <div className='Location'>
         <input id="searchBar" placeholder={placeholderText}></input>
-        <button id='getLocation' onClick={handleSubmit}>Get Location</button>
+        <button id='getDrip' onClick={handleSubmit}>Get My Drip</button>
       </div>
       <div className='dripImage'> 
-        {hasImage && <img id= 'drip' src={image} alt="filler"></img>}
+        {hasLocation && hasWeather && hasImage && <img id= 'drip' src={image} alt="filler"></img>}
       </div>
     </div>
   );
