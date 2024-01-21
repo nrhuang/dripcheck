@@ -31,6 +31,7 @@ function App() {
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
+          setHasLocation(true);
         },
         (error) => {
           console.log('Error getting current location: ', error);
@@ -38,7 +39,7 @@ function App() {
     } else {
       console.log("Geolocation not supported");
     }
-  } [];
+  }
   
   useEffect(() => {
     createPrompt();
