@@ -102,16 +102,18 @@ function App() {
     }
   }
   
-  function getWeather() {
-    if(!hasLocation) return;
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${currLocation.latitude}&lon=${currLocation.longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
-      .then(response => response.json())
-      .then(data => {
-        setWeather(data);
-        setHasWeather(true);
-      })
-      .catch(error => console.log(error));
-  }
+function getWeather() {
+  if (!hasLocation || !currLocation) return;
+  const [latitude, longitude] = currLocation;
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`)
+    .then(response => response.json())
+    .then(data => {
+      setWeather(data);
+      setHasWeather(true);
+    })
+    .catch(error => console.log(error));
+}
+
 
   function getInput() {
     setHasImage(true);
