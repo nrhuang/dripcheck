@@ -62,8 +62,7 @@ function App() {
   },[location])
   
   function handleSubmit() {
-    getInput();
-    createPrompt();
+    getOutfitRec();
   }
   
   function getLocation() {
@@ -92,19 +91,13 @@ function App() {
       })
       .catch(error => console.log(error));
   }
-
-  function getInput() {
-    setHasImage(true);
-    var input = document.getElementById("searchBar");
-    console.log(input.value);
-    if(input.value === 'meow') setImage("https://media1.tenor.com/m/Jc9jT66AJRwAAAAd/chipi-chipi-chapa-chapa.gif");
-    else if(input.value === 'gojo') setImage("https://i.redd.it/s85ejs5xxz4c1.gif");
-    else if(input.value === 'gullible') setImage("https://media1.tenor.com/m/DABdHr-IoaAAAAAC/cat-gullible.gif");
-  }
   
-  function createPrompt() {
-    console.log(location);
-    console.log(weather);
+  function getOutfitRec() {
+    var input = document.getElementById('searchBar').value;
+    var prompt = `Here are the current weather conditions: ${weather.weather[0].description}, Temperature: ${weather.main.temp} degrees celsius. ` + input + ` . Tell me what to wear.`
+    fetch(`http://localhost:5000/api/chatgpt/${prompt}`)
+      .then(res => res.text())
+      .then(data => console.log(data))
   }
   
   return (
