@@ -41,6 +41,7 @@ body {
 .Title {
   text-align: center;
   font-size: 39px;
+  color: #3e4772;
 }
 
 #searchBar {
@@ -60,10 +61,10 @@ body {
 #getDrip {
   height: 46px;
   width: 100px;
-  color: #9dd9f3;
+  color: #3e4772;
   font-family: "FredokaOne";
   src: url('../public/Fredoka.ttf') format('truetype');
   font-weight: bold;
   border-radius: 20px;
-  border-color: rgb(58, 229, 215);
+  border-color: #3e4772;
 }

@@ -35,7 +35,7 @@ function App() {
     } else {
       console.log("Geolocation not supported");
     }
-  };
+  }
   
   useEffect(() => {
     getLocation();
