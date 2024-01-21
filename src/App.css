@@ -12,8 +12,16 @@ body {
 }
 
 .Map {
-  margin-left: 100px;
+  margin-left: 450px;
   border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.CurrPos {
+  text-align: center;
+  color: #3e4772;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 #logo {
@@ -28,6 +36,19 @@ body {
 .dripImage {
   text-align: center;
   margin-top: 30px;
+}
+
+.Switch {
+  text-align: center;
+  color: #3e4772;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.toggleSwitch {
+  vertical-align: middle;
+  margin-left: 4px;
 }
 
 #drip {
