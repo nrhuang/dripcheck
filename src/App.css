@@ -12,7 +12,16 @@ body {
 }
 
 .Map {
-  align-self: center;
+  margin-left: 450px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.CurrPos {
+  text-align: center;
+  color: #3e4772;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 #logo {
@@ -27,6 +36,19 @@ body {
 .dripImage {
   text-align: center;
   margin-top: 30px;
+}
+
+.Switch {
+  text-align: center;
+  color: #3e4772;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.toggleSwitch {
+  vertical-align: middle;
+  margin-left: 4px;
 }
 
 #drip {
@@ -73,4 +95,9 @@ body {
   border-radius: 20px;
   border-color: #3e4772;
   box-shadow: 2px 3px 10px #597cbc;
+}
+
+#getDrip:hover {
+  background-color: #304674;
+  color: white;
 }
