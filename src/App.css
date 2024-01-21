@@ -100,4 +100,5 @@ body {
 #getDrip:hover {
   background-color: #304674;
   color: white;
+  cursor: pointer;
 }
