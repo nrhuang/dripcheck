@@ -12,7 +12,8 @@ body {
 }
 
 .Map {
-  align-self: center;
+  margin-left: 100px;
+  border-radius: 20px;
 }
 
 #logo {

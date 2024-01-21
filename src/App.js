@@ -23,10 +23,10 @@ function App() {
   useEffect(() => {
         const defaultMapOptions = {
             center: {
-                lat: 40.762312,
-                lng: -73.979345
+                lat: 49.262152,
+                lng: -123.244766
             },
-            zoom: 11
+            zoom: 15
         };
         loader.load().then((google) => {
             const map = new google.maps.Map(
@@ -113,12 +113,15 @@ function App() {
         <link rel="icon" href="%PUBLIC_URL%/dripcheck.ico" />
         <title>Drip Check</title>
       </head>
-      <div ref={(ref) => { googleMapDiv = ref }}
-        style={{ height: '50vh', width: '50vh' }}>
-      </div>
       <img id="logo" src="dripcheck.png" alt= "logo"/>  
       <div className='Title'>
         <h1 id='header'> Check The Drip &#9748;</h1>
+      </div>
+      <div className="Map" ref={(ref) => { googleMapDiv = ref }}
+        style={{ height: '35vh', width: '67vh' }}>
+      </div>
+      <div className='CurrPos'>
+        <h2>meow</h2>
       </div>
       <div className='Location'>
         <input id="searchBar" placeholder={placeholderText}></input>
