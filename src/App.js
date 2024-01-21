@@ -91,10 +91,10 @@ function App() {
     var input = document.getElementById('searchBar').value;
     var prompt = `Here are the current weather conditions: ${weather.weather[0].description}, Temperature: ${weather.main.temp} degrees celsius. ` + input + ` . Tell me what to wear.`
     fetch(`http://localhost:8000/api/chatgpt/${prompt}`)
-      .then(res => res.text())
-      .then(data => setImage(data))
+      .then(res => res.json())
+      .then(data => setImage(data.message))
       .then(data => setHasImage(true))
-    console.log(image);
+    
   }
 
   function getWeatherGoogle() {
@@ -199,7 +199,8 @@ function App() {
       </div>
 
       <div className='dripImage'> 
-        {(hasLocation || hasMapLocation) && hasWeather && hasImage && <img id= 'drip' src={image} alt="filler"></img>}
+        {clicked && !image && <img id= 'loading' src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="filler"></img>}
+        {(hasLocation || hasMapLocation) && hasWeather && image && <img id= 'drip' src={image} alt="filler"></img>}
       </div>
 
     </div>
