@@ -1,6 +1,34 @@
-# Getting Started with Create React App
+# DripCheck
+## Inspiration
+With recent erratic Vancouver weather, people have been struggling to dress for the weather while still being able to express themselves through their own personal styles. Between checking our weather apps and staring at our closets every single morning, finding the right drip is draining people's time. That is why we created DripCheck - to solve chronic indecision and to help people's styles shine regardless of the weather.
+## What it does
+DripCheck is a web app that uses ChatGPT 3.5 and DALL·E 3 to generate the perfect outfit recommendation given the user's preferences and location and weather data.
+Once you open the web app, select either your current location or the location of where you're going that day. Then type in an optional prompt to give your outfit some personal flare. After hitting "Get My Drip", DripCheck will generate an image of your outfit via ChatGPT and DALL·E 3.
+## How we built it
+We first implemented React's geolocation library to get the user's current latitude and longitude. We then passed the location data to the Open Weather API, which gets the current weather conditions at the given location. We then concatenated the weather data with the user's text input and some metadata to create a single string prompt that would be passed to ChatGPT.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+After some discussion with William, a nwHacks mentor, we decided to create a backend server from which to call the ChatGPT and DALL·E 3 APIs in order to keep our api keys safe. We did so by utilizing ExpressJS to handle requests for our api endpoints. As a result, we were able to get outfit recommendations from ChatGPT. Subsequently, we passed those recommendations into DALL·E 3 to generate images of them, which we sent to the frontend via image urls in json form.
+
+The front end was entirely created using React, HTML, and CSS.
+## Challenges we ran into
+- All of us were quite new to React, so we had to learn a lot to create our frontend
+- With so many API calls, we struggled with managing api keys and waiting for asynchronous calls
+- We weren't expecting to need an express server, so quickly coding one up was also a challenge
+- The Google Maps API was particularly difficult to use and integrate with the rest of our app
+## Accomplishments that we're proud of
+- Creating an intuitive and aesthetic frontend using React
+- Creating a working backend Express server to protect our api keys
+- Dealing with multiple API interactions and asynchronous calls
+- Successfully building and implementing the Google Maps API
+## What we learned
+- How to use React and Express
+- How to force many asynchronous API calls to behave synchronously
+- The importance of protecting your api keys
+## What's next for DripCheck
+- Faster loading time
+- Implementation of future weather forecast and outfit looks
+- Converting latitude and longitude into an address using the Google Maps Places API for more user readability
+- Adding the ability to save past outfits, potentially using a database
 
 ## Available Scripts
 
@@ -11,60 +39,6 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `node backend/server.js`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Runs the backend server.
