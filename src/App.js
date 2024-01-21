@@ -56,6 +56,9 @@ function App() {
   },[mapLocation, clicked])
   
   function handleSubmit() {
+    if(hasImage) {
+      setHasImage(false);
+    }
     getOutfitRec();
     setClicked(true);
   }
@@ -94,7 +97,6 @@ function App() {
       .then(res => res.json())
       .then(data => setImage(data.message))
       .then(data => setHasImage(true))
-    
   }
 
   function getWeatherGoogle() {
@@ -195,12 +197,12 @@ function App() {
 
       <div className='Location'>
         <input id="searchBar" placeholder={placeholderText}></input>
-        <button id='getDrip' onClick={handleSubmit} disabled={!hasLocation && !hasWeather}>Get My Drip</button>
+        <button id='getDrip' onClick={handleSubmit} disabled={!hasLocation && !hasWeather && !hasMapLocation}>Get My Drip</button>
       </div>
 
       <div className='dripImage'> 
-        {clicked && !image && <img id= 'loading' src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="filler"></img>}
-        {(hasLocation || hasMapLocation) && hasWeather && image && <img id= 'drip' src={image} alt="filler"></img>}
+        {clicked && !hasImage && <img id= 'loading' src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="filler"></img>}
+        {(hasLocation || hasMapLocation) && hasWeather && hasImage && <img id= 'drip' src={image} alt="filler"></img>}
       </div>
 
     </div>
