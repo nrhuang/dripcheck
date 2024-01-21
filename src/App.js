@@ -93,7 +93,9 @@ function App() {
     var prompt = `Here are the current weather conditions: ${weather.weather[0].description}, Temperature: ${weather.main.temp} degrees celsius. ` + input + ` . Tell me what to wear.`
     fetch(`http://localhost:5000/api/chatgpt/${prompt}`)
       .then(res => res.text())
-      .then(data => console.log(data))
+      .then(data => setImage(data))
+      .then(data => setHasImage(true))
+    console.log(image);
   }
 
   function getWeatherGoogle() {
